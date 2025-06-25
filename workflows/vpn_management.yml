@@ -1,0 +1,20 @@
+name: 1 - Run action
+run-name: By @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  user-management:
+    if: ${{ github.actor == 'senad-d' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: senad-d/${{ secrets.PRIVATE_REPO }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
