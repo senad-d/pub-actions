@@ -3,6 +3,9 @@ run-name: By @${{ github.actor }}
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - '*'
 
 permissions:
   contents: read
@@ -27,5 +30,6 @@ jobs:
 
       - name: Clear GitHub credentials
         run: |
-          git config --global --remove-section credential || true
+          git credential-cache exit
+          git config --global --unset credential.helper
           echo "GitHub credentials cleared!"
