@@ -37,10 +37,3 @@ jobs:
         run: |
           bash run.sh ${{ secrets.S3_BUCKET_NAME }} > /dev/null 2>&1 
 
-      - name: Cleanup AWS Credentials
-        if: ${{ always() }}
-        run: |
-          unset AWS_ACCESS_KEY_ID
-          unset AWS_SECRET_ACCESS_KEY
-          unset AWS_SESSION_TOKEN
-          echo "AWS credentials cleaned up."
