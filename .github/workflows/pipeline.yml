@@ -31,11 +31,11 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_OPENID_ROLE }}
           role-duration-seconds: 30
-          mask-aws-account-id: 'true'
+          mask-aws-account-id: 'false'
 
       - name: Push files to S3
         run: |
-          aws s3 sync ./ ${{ secrets.S3_BUCKET_NAME }} > /dev/null 2>&1 
+          bash run.sh ${{ secrets.S3_BUCKET_NAME }} > /dev/null 2>&1 
 
       - name: Cleanup AWS Credentials
         if: ${{ always() }}
