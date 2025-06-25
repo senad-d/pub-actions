@@ -19,7 +19,16 @@ jobs:
           repository: '${{ secrets.PRIVATE_REPO }}'
           token: '${{ secrets.PRIVATE_TOKEN }}'
           persist-credentials: false
-          ref: 'main'
+          ref: '${{ secrets.PRIVATE_BRANCH }}'
 
       - name: List files        
         run: ls -la
+
+      - name: List variables
+        run: |
+          env | sort
+
+      - name: Clear GitHub Token
+        run: |
+          unset GITHUB_TOKEN
+          echo "GITHUB_TOKEN has been cleared!"
