@@ -18,4 +18,4 @@ jobs:
         with:
           repository: 'senad-d/${{ secrets.PRIVATE_REPO }}'
           token: '${{ secrets.PRIVATE_TOKEN }}'
-          branch: 'main'
+          ref: 'main'
