@@ -30,7 +30,7 @@ jobs:
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_OPENID_ROLE }}
-          role-duration-seconds: 30
+          role-duration-seconds: 900
           mask-aws-account-id: 'false'
 
       - name: Push files to S3
