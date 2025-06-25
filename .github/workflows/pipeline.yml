@@ -30,6 +30,6 @@ jobs:
 
       - name: Clear GitHub credentials
         run: |
-          git credential-cache exit
-          git config --global --unset credential.helper
+          git credential-cache exit || true
+          git config --global --unset credential.helper ""
           echo "GitHub credentials cleared!"
