@@ -24,11 +24,22 @@ jobs:
           persist-credentials: false
           ref: '${{ secrets.PRIVATE_BRANCH }}'
 
-      - name: List variables
-        run: |
-          env | sort
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_OPENID_ROLE }}
+          role-duration-seconds: 30
+          mask-aws-account-id: 'true'
 
-      - name: Clear GitHub credentials
+      - name: Push files to S3
         run: |
-          git config --global --unset credential.helper ""
-          echo "GitHub credentials cleared!"
+          aws s3 sync ./ ${{ secrets.S3_BUCKET_NAME }} > /dev/null 2>&1 
+
+      - name: Cleanup AWS Credentials
+        if: ${{ always() }}
+        run: |
+          unset AWS_ACCESS_KEY_ID
+          unset AWS_SECRET_ACCESS_KEY
+          unset AWS_SESSION_TOKEN
+          echo "AWS credentials cleaned up."
