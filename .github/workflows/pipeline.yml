@@ -27,8 +27,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: ${{ env.AWS_REGION }}
-          role-to-assume: ${{ vars.AWS_OPENID_ROLE }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_OPENID_ROLE }}
           role-duration-seconds: 30
           mask-aws-account-id: 'true'
 
