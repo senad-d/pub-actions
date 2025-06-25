@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: 'senad-d/${{ secrets.PRIVATE_REPO }}'
+          repository: '${{ secrets.PRIVATE_REPO }}'
           token: '${{ secrets.PRIVATE_TOKEN }}'
           persist-credentials: false
           ref: 'main'
