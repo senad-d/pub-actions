@@ -21,14 +21,11 @@ jobs:
           persist-credentials: false
           ref: '${{ secrets.PRIVATE_BRANCH }}'
 
-      - name: List files        
-        run: ls -la
-
       - name: List variables
         run: |
           env | sort
 
-      - name: Clear GitHub Token
+      - name: Clear GitHub credentials
         run: |
-          unset GITHUB_TOKEN
-          echo "GITHUB_TOKEN has been cleared!"
+          git config --global --remove-section credential || true
+          echo "GitHub credentials cleared!"
